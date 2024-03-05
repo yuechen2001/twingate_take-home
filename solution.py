@@ -1,6 +1,7 @@
 class GameOfLife:
     def __init__(self, seed_file):
         self.seed = self.read_seed_file(seed_file)
+        self.current_generation = self.seed
         self.n_rows = len(self.seed)
         self.n_cols = len(self.seed[0])
 
@@ -17,9 +18,9 @@ class GameOfLife:
                         grid[row][col], live_neighbors
                     )
 
-            grid = new_grid.copy()
+            self.current_generation = new_grid.copy()
             print("Generation", i + 1, ":")
-            self.print_grid(grid)
+            self.print_grid(self.current_generation)
 
     # Count the number of live neighbours for a given cell
     def count_live_neighbors(self, grid, row, col):
@@ -83,5 +84,5 @@ if __name__ == "__main__":
     print("Seed State:")
     game.print_grid(game.seed)
 
-    print("Generations:")
+    print("10 Generations:")
     game.simulate(10)
